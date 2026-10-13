@@ -1,3 +1,6 @@
+# Installation
+
+## Install dependencies
 ```bash
 # Update system
 sudo apt update && sudo apt upgrade -y
@@ -28,11 +31,15 @@ node -v   # should show v24.x
 npm -v
 
 ```
+
+## Install REA
 ```bash
 
 npm install --global rea-agents
 
 ```
+
+## Config REA
 ```bash
 
 rea setup
@@ -48,6 +55,9 @@ rea doctor --json   # machine-readable report
 
 ```
 
+# Tests
+
+## native binary with Provider
 ```bash
 
 export REA_ANALYSIS_PROVIDER=ghidra   # or hopper
@@ -85,10 +95,13 @@ rea capabilities --json
 
 ```
 
+## Go binaries (no extra tools needed)
 ```bash
-
 rea inspect-go-binary /absolute/path/to/go-program --json
+```
 
+## .NET / managed assemblies (static only)
+```bash
 # Identity + deployment form
 rea inspect-managed-artifact /absolute/path/Assembly.dll --json
 
@@ -100,6 +113,7 @@ rea inspect-managed-members /absolute/path/Assembly.dll --type Example.Parser --
 
 ```
 
+## Working with Evidence files
 ```bash
 # Save a big analysis result
 rea analyze-javascript-application /path/to/app --json > app-evidence.json
@@ -116,6 +130,8 @@ rea evidence-import /path/to/evidence/bundle.json
 rea evidence-export /path/to/evidence/bundle.json /path/to/canonical.json
 
 ```
+
+## Snapshots (reuse previous analysis)
 ```bash
 
 # Analyze and save a snapshot at the same time
@@ -125,6 +141,7 @@ rea analyze /path/to/program --provider ghidra --snapshot /path/to/program-snaps
 rea analyze /path/to/program --provider ghidra --snapshot /path/to/program-snapshot.json
 ```
 
+## Other useful commands
 ```bash
 # Health / readiness check
 rea doctor
@@ -145,9 +162,7 @@ rea analyze --help
 
 
 
-
-
-
+# Example - Javascript
 ```bash
 
 # Make sure you have a recent Node.js
@@ -189,6 +204,7 @@ npx -y rea-agents@latest analyze-javascript-application "$(pwd)" --json
 
 ```
 
+# Example - Web Page
 
 ```bash
 
@@ -211,5 +227,5 @@ rea analyze-web-bundle http://127.0.0.1:9222 TARGET_ID --json
 
 rea observe-web-session http://127.0.0.1:9222 TARGET_ID \
   --observation-ms 10000 --json
-  
+
 ```
